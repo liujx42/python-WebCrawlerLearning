@@ -12,7 +12,7 @@ def getTitle(url):
     except URLError as e:
         return None
     try:
-        bsObj = BeautifulSoup(html.read(),'lxml')
+        bsObj = BeautifulSoup(html.read())
         title = bsObj.body.h1
     except AttributeError as e:
         return None
