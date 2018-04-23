@@ -5,4 +5,5 @@
 **注意：使用python3语法**
 
 参考资料：[1] Ryan Mitchell “Web Scraping with Python - Collecting Data From the Modern Web”. （中文译本：《Python网络数据采集》）
+
          [2] 中国MOOC 《Python网络爬虫与信息提取》 嵩天 
