@@ -4,7 +4,7 @@ import os
 
 url = "http://pic29.photophoto.cn/20131204/0034034499213463_b.jpg"
 path = os.getcwd()
-phname = path + '\\1-' + url.split('/')[-1]
+phname = path + '\\' + url.split('/')[-1]
 
 try:
 	uag = {'user-agent':'Chrome/66.0.3359.117'}
