@@ -15,13 +15,19 @@ def getHTMLText(url):
 		
 def parsePage(ilt, html):
 	try:
-		times = re.findall(r'title=\"创建时间\">[\d]*.[\d]*',html)
+		times = re.findall(r'title=\"创建时间\">[\d]*[-:][\d]*',html)
 		titles = re.findall('class=\"j_th_tit \">.*<',html)
 		for i in range(len(times)):
 			timels = times[i].split('>')[1]
+			
 			match = re.match(r'[\d]*:[\d]*',timels)
 			if match:
-				timels = time.strftime('%m-%d', time.localtime())
+				timels = time.strftime('%Y-%m-%d', time.localtime())
+				
+			match = re.match(r'[\d]{1,2}-[\d]*',timels)
+			if match:
+				timels = time.strftime('%Y-', time.localtime()) + timels
+				
 			title = titles[i].split('>')[1][:-1]
 			ilt.append([timels, title])
 	except:
@@ -44,7 +50,7 @@ def main():
 	time.sleep(3)
 	filename = '贴吧'
 	start_url = "https://tieba.baidu.com/f?kw=租车&ie=utf-8&pn="
-	depth = 1891
+	depth = 2
 	infoList = []
 	
 	for i in range(depth):
