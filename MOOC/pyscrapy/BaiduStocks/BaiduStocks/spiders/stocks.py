@@ -8,7 +8,7 @@ class StocksSpider(scrapy.Spider):
     start_urls = ['http://quote.eastmoney.com/stocklist.html']
 
     def parse(self, response):
-        for href in response.css('a::attr(href)').extract()[:500]:
+        for href in response.css('a::attr(href)').extract()[:100]:
             try:
                 stock = re.findall(r"[s][hz]\d{6}", href)[0]
                 url = 'https://gupiao.baidu.com/stock/' + stock + '.html'

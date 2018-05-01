@@ -17,6 +17,8 @@ def parsePage(ilt, html):
 	try:
 		times = re.findall(r'title=\"创建时间\">[\d]*[-:][\d]*',html)
 		titles = re.findall('class=\"j_th_tit \">.*<',html)
+		huifus = re.findall('\"回复\">.*<',html)
+
 		for i in range(len(times)):
 			timels = times[i].split('>')[1]
 			
@@ -29,27 +31,28 @@ def parsePage(ilt, html):
 				timels = time.strftime('%Y-', time.localtime()) + timels
 				
 			title = titles[i].split('>')[1][:-1]
-			ilt.append([timels, title])
+			huifu = huifus[i].split('>')[1][:-1]
+			ilt.append([timels, title, huifu])
 	except:
 		print('Wrong')
 			
 def printGoodsList(ilt, filename):
 	path = os.getcwd()
-	phname = path + '\\' + filename + '_时间与标题.txt'	
-	tplt = "{:^4}\t{:<10}\t{:<60}\n"
+	phname = path + '\\' + filename + '吧.txt'	
+	tplt = "{:^4}\t{:<10}\t{:<10}\t{:<60}\n"
 	count = 0		
 	with open(phname,'w' ,encoding='utf-8') as f:
-		f.writelines(tplt.format('序号','时间','标题'))
+		f.writelines(tplt.format('序号','时间','回复','标题'))
 		for g in ilt:
 			count = count + 1
-			f.writelines(tplt.format(count,g[0],g[1]))	
+			f.writelines(tplt.format(count,g[0],g[2],g[1]))	
 		f.close()
 		print('Sucessed')
 			
 def main():
 	time.sleep(3)
-	filename = '贴吧'
-	start_url = "https://tieba.baidu.com/f?kw=租车&ie=utf-8&pn="
+	filename = '租车'
+	start_url = "https://tieba.baidu.com/f?ie=utf-8&kw=" + filename + "&pn="
 	depth = 2
 	infoList = []
 	
